@@ -195,7 +195,6 @@ export default {
       const dropVue = dropElem.__vue__
 
       if (dropVue && dropVue.$options.name === 'Pile') {
-        console.log('dropping on pile')
         this.channel.push('play_card', { card: card, pile_id: dropVue.pile.id })
           .receive('ok', () => {
             if (card.location === 'stack') {
@@ -232,7 +231,6 @@ export default {
         }
         this.saveState()
       } else if ($event.card.value === 1 && (dropElem.classList.contains('play-area') || dropElem.classList.contains('play-area-container'))) {
-        console.log('dropping on play area')
         this.channel.push('new_pile', $event.card)
           .receive('ok', () => {
             this.snapBack(draggedElem)
@@ -255,13 +253,11 @@ export default {
     },
 
     snapBack (elem) {
-      console.log('snap back')
       elem.style.transform = 'translate(0,0)'
       elem.classList.remove('dragging')
     },
 
     animateBack (elem) {
-      console.log('animate back')
       elem.style.transition = 'transform 0.2s ease-in-out'
       elem.style.transform = 'translate(0,0)'
       setTimeout(() => {
@@ -307,7 +303,6 @@ export default {
           localStorage.clear()
           this.$router.push('/')
         } else {
-          console.log(e)
         }
       })
     },
@@ -362,7 +357,6 @@ export default {
     },
 
     setHand (hand) {
-      console.log(hand)
       this.stack = hand.stack
       this.row = hand.row
       this.hand = hand.hand
@@ -379,7 +373,6 @@ export default {
     saveState () {
       const stateString = JSON.stringify({ hand: this.hand, row: this.row, stack: this.stack, gameOver: this.gameOver })
       localStorage.setItem('player_cards', stateString)
-      console.log('saved')
     },
 
     loadState () {
@@ -394,12 +387,10 @@ export default {
     },
 
     ligretto () {
-      console.log('hi')
       this.channel.push('ligretto')
     },
 
     showEndOfRound (results, gameover = false) {
-      console.log(results)
       this.piles = []
       this.gameState = 'waiting_for_players'
       results.forEach(r => {

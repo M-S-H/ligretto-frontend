@@ -16,8 +16,6 @@ import './styles/application.scss'
 const host = 'warm-refuge-03953.herokuapp.com'
 const baseUrl = `https://${host}/api/`
 
-console.log(baseUrl)
-
 Vue.prototype.$axios = axios.create({
   baseURL: baseUrl
 })
