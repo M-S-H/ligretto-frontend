@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo&display=swap');
+@import "~@aetherial/aetherial-styles/aetherial";
+@import "./variables";
+@import "./game.scss";
+@import "./home.scss";
+
+$ligretto-theme: (
+  // Typeography
+  // font-family-ui: ('Montserrat', sans-serif),
+  // font-family-base: ('Roboto', sans-serif),
+
+  // Colors
+  primary-color: $blue,
+  secondary-color: $blue,
+  success-color: $green,
+  warning-color: $yellow,
+  error-color: $red,
+  dark-gray-color: #444,
+  medium-gray-color: #B9BED2,
+  light-gray-color: #F1F2F7,
+  white-color: white,
+  black-color: black,
+  color-palette: (primary, secondary, success, warning, error, dark-gray, medium-gray, light-gray, white, black),
+
+  modal-shadow: (0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)),
+  modal-heading-color: white,
+  modal-header-padding: 10px 20px 10px 20px,
+  modal-content-padding: 10px 20px,
+  modal-actions-padding: 10px 20px 10px 20px,
+  modal-divider: 1px solid #F1F2F7,
+  large-modal-width: 1200px
+);
+@include aetherial($ligretto-theme);
+
+html,
+body,
+#app {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: $bg;
+  font-family: 'Baloo', cursive;;
+}

@@ -1,0 +1,54 @@
+.welcome {
+  margin: 20px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(black, 0.3);
+  border-radius: 10px;
+
+  h1 {
+    text-align: center;
+    letter-spacing: 0.1em;
+    // span { padding: 5px; }
+
+    span.blue { color: $blue; }
+    span.red { color: $red; }
+    span.green { color: $green; }
+    span.yellow { color: $yellow; }
+  }
+
+  .create-or-join {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+
+    & > * {
+      text-align: center;
+      flex: 1;
+    }
+  }
+
+  button {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  input {
+    margin: 5px 0px;
+  }
+}
+
+input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  background: #eee;
+  border: 1px solid #eee;
+  border-radius: 5px;
+
+  &:focus {
+    box-shadow: 0 0 3px 3px rgba($blue, 0.2);
+    border: 1px solid $blue;
+  }
+}
