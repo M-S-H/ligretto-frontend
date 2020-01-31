@@ -21,7 +21,7 @@
 //   keeper.classList.add('keeper');
 //   keeper.style.width = draggableItemRect.width + 'px';
 //   keeper.style.height = draggableItemRect.height + 'px';
-  
+
 //   /* Appends the elment before the active draggable item */
 //   draggableItem.parentElement.insertBefore(keeper, draggableItem);
 // };
@@ -52,25 +52,25 @@
 //   if(this.classList.contains('animatable')) {
 //     this.classList.remove('animatable');
 //   }
-  
+
 //   // Removes the style
 //   this.removeAttribute('style');
-  
+
 //   // Removes the keeper
 //   if(this && this.parentElement && this.parentElement.querySelector('.keeper')) {
 //     this.parentElement.removeChild(this.parentElement.querySelector('.keeper'));
 //   }
-  
+
 //   // Removes active class
 //   if(this.classList.contains('active')) {
 //     this.classList.remove('active');
 //   }
-  
+
 //   // Moves the element if it was dropped inside a drop area
 //   if(targetElement && targetElement.classList.contains('drop-area') && this.parentElement) {
 //     lastActiveDropArea.appendChild(this);
 //   }
-  
+
 //   // Removes the transition end event listener
 //   this.removeEventListener('transitionend', resetTransitionEndHandler);
 // };
@@ -90,31 +90,31 @@
 
 // /* Create handlers to each interaction */
 // let interactionStart = function(element, coordX, coordY) {
-  
+
 //   // Adds affordance in Drop Areas
 //   dropAreas.forEach(function(dropArea) {
 //     if(!dropArea.classList.contains('affordance')) {
 //       dropArea.classList.add('affordance');
 //     }
 //   });
-  
+
 //   // Defines variables
 //   let draggableItemRect = element.getBoundingClientRect();
-  
+
 //   /* Sets initial values */
 //   initialX = coordX;
 //   initialY = coordY;
 //   startingX = draggableItemRect.left;
 //   startingY = draggableItemRect.top;
-  
+
 //   /* Configures the size and position of the draggable-item */
 //   element.style.width = draggableItemRect.width + 'px';
 //   element.style.height = draggableItemRect.height + 'px';
 //   element.style.transform = "translateX(" + draggableItemRect.left + "px) translateY( " + draggableItemRect.top + "px) translateZ(0)";
-  
+
 //   /* Creates the keeper */
 //   createKeeper(element);
-  
+
 //   /* Adds active class */
 //   if(!element.classList.contains('active')) {
 //     element.classList.add('active');
@@ -125,13 +125,13 @@
 //   /* Sets offset values */
 //   offsetX = coordX - initialX;
 //   offsetY = coordY - initialY;
-  
+
 //   /* Transforms the UI to move the element */
 //   element.style.transform = "translateX(" + (startingX + offsetX) + "px) translateY(" + (startingY + offsetY) + "px) translateZ(0) scale(1)";
-  
+
 //   // Gets target active drop area
 //   targetElement = document.elementFromPoint(coordX, coordY);
-  
+
 //   if(targetElement && targetElement.closest('.drop-area')) {
 //     targetElement = targetElement.closest('.drop-area');
 //     setLastActiveDropArea(targetElement);
@@ -147,25 +147,25 @@
 //     if(dropArea.classList.contains('active')) {
 //       dropArea.classList.remove('active');
 //     }
-    
+
 //     // Removes the affordance class
 //     if(dropArea.classList.contains('affordance')) {
 //       dropArea.classList.remove('affordance');
 //     }
 //   });
-  
+
 //   // Adds animatable class
 //   if(!element.classList.contains('animatable')) {
 //     element.classList.add('animatable');
 //   }
-  
+
 //   // Checks if the drop was done inside or outside a drop area
 //   if(targetElement && targetElement.classList.contains('drop-area')) {
 //     element.style.transform = "translateX(" + (startingX + offsetX) + "px) translateY(" + (startingY + offsetY) + "px) translateZ(0) scale(0)";
 //   } else {
 //     element.style.transform = "translateX(" + startingX + "px) translateY(" + startingY + "px) translateZ(0)";
 //   }
-  
+
 //   element.addEventListener('transitionend', resetTransitionEndHandler);
 // };
 
