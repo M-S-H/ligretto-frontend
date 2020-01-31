@@ -14,7 +14,7 @@
       </av-button-group>
 
       <div class="create-game" v-if="createOrJoin == 'join'">
-        <input type="text" v-model="joinForm.game_id" placeholder="Game ID" />
+        <input type="text" v-model="joinForm.game_id" placeholder="Game Code" />
         <input type="text" v-model="joinForm.name" placeholder="Name" />
         <input type="text" v-model="joinForm.color" placeholder="Color" />
         <av-button @click="joinGame">Join!</av-button>

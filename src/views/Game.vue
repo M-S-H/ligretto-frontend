@@ -6,7 +6,7 @@
 
     <div class="waiting-modal" v-if="gameState == 'gathering_players' || gameState == 'waiting_for_players'">
       <div class="game-id">
-        GAME ID: {{ gameId }}
+        GAME CODE: {{ gameId }}
       </div>
 
       <div class="game-over" v-if="gameOver">
