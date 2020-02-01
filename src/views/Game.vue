@@ -6,14 +6,23 @@
 
     <div class="waiting-modal" v-if="gameState == 'gathering_players' || gameState == 'waiting_for_players'">
       <div class="game-id">
-        GAME CODE: {{ gameId }}
+        <template v-if="!gameOver">GAME CODE: {{ gameId }}</template>
+        <template v-if="gameOver">GAME OVER</template>
       </div>
 
-      <div class="game-over" v-if="gameOver">
-        <h1>Game Over!</h1>
+      <div class="round-num" v-if="currentRound < totalRounds">
+        Starting Round {{ currentRound + 1 }} of {{ totalRounds }}
       </div>
-      <!-- ME: {{ player.name }} <br>
-      Waiting for players -->
+
+      <div class="winner" v-if="roundWinner">
+        <template v-if="roundWinner.id == player.id">
+          You ended the round!
+        </template>
+
+        <template v-if="roundWinner.id != player.id">
+          {{ roundWinner.name }} ended the round
+        </template>
+      </div>
 
       <div class="round-score-wrap" v-if="roundScore">
         <div class="round-score">Your Round Score: {{ this.roundScore }}</div>
@@ -21,7 +30,7 @@
       <!-- <h3>Players: {{ players.length }}</h3> -->
       <div class="player-list">
         <div class="player-listing" v-for="(p, i) of players" :key="p.id">
-          <span class="player-rank">{{ i }}</span>
+          <span class="player-rank">{{ i + 1 }}</span>
           <span class="player-name">{{ p.name }}</span>
           <span class="player-score">{{ p.score }}</span>
           <span class="player-status">
@@ -49,7 +58,7 @@
       <!-- Main Play Area -->
       <div class="play-area-container">
         <div class="play-area">
-          <pile v-for="pile of piles" :key="pile.id" :pile="pile"></pile>
+          <pile v-for="pile of activePiles" :key="pile.id" :pile="pile"></pile>
         </div>
         <!-- <span v-for="h of hand" :key="h.id">{{ h.value }} - </span> -->
       </div>
@@ -127,10 +136,12 @@ export default {
       handPosition: -1,
       piles: [],
       gameId: null,
-      currentRound: 0,
+      currentRound: 1,
+      totalRounds: 0,
       channel: null,
       countingDown: false,
       count: 3
+      // winningId: null
     }
   },
 
@@ -164,6 +175,18 @@ export default {
       let allReady = true
       this.players.forEach(p => { allReady = allReady && p.ready })
       return allReady
+    },
+
+    activePiles () {
+      return this.piles.filter(p => p.currentValue !== 10)
+    },
+
+    roundWinner () {
+      if (this.currentValue === 0) {
+        return null
+      }
+
+      return this.players.find(p => p.wonLastRound)
     }
 
     // rankedPlayers () {
@@ -295,7 +318,8 @@ export default {
         this.players = resp.data.players
         this.player = this.players.find(p => p.id === this.playerId)
         this.piles = resp.data.piles
-        this.currentRound = resp.data.currentRound
+        this.currentRound = resp.data.game.current_round
+        this.totalRounds = resp.data.game.total_rounds
         this.loadState()
         this.connectToGame()
       }).catch(e => {
@@ -391,14 +415,15 @@ export default {
     },
 
     showEndOfRound (results, gameover = false) {
+      this.currentRound += 1
       this.piles = []
-      this.gameState = 'waiting_for_players'
       results.forEach(r => {
         const player = this.players.find(p => p.id === r.player_id)
         player.score = r.new_score
         if (player.id === this.player.id) {
           this.roundScore = r.round_score
         }
+        player.wonLastRound = r.winner
       })
 
       this.gameOver = gameover
@@ -412,6 +437,8 @@ export default {
           return 0
         }
       })
+
+      this.gameState = 'waiting_for_players'
 
       // this.players = this.players.sort(p => p.score)
     },

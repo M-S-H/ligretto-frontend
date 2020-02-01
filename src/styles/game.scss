@@ -37,10 +37,22 @@ $card-height: calc(#{$height-eq});
     margin: 0;
   }
 
+  .winner {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   .game-id {
     padding: 20px;
+    padding-bottom: 5px;
     text-align: center;
     font-weight: bold;
+  }
+
+  .round-num {
+    text-align: center;
+    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .round-score-wrap {
@@ -137,12 +149,15 @@ $card-height: calc(#{$height-eq});
   width: 100%;
   flex: 1;
   overflow: scroll;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .play-area {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
+  padding-bottom: 20px;
   // background: purple;
 }
 

@@ -12,15 +12,18 @@ import { Socket } from 'phoenix'
 // Import stylesheet
 import './styles/application.scss'
 
-// const host = 'localhost:4000'
-const host = 'warm-refuge-03953.herokuapp.com'
-const baseUrl = `https://${host}/api/`
+const host = 'localhost:4000'
+const baseUrl = `http://${host}/api/`
+const socketUrl = `ws://${host}/socket`
+// const host = 'warm-refuge-03953.herokuapp.com'
+// const baseUrl = `https://${host}/api/`
+// const socketUrl = `wss://${host}/socket`
 
 Vue.prototype.$axios = axios.create({
   baseURL: baseUrl
 })
 
-Vue.prototype.$socket = new Socket(`wss://${host}/socket`, { params: { userToken: '123' } })
+Vue.prototype.$socket = new Socket(socketUrl, { params: { userToken: '123' } })
 
 Vue.directive('drag', dragDir)
 Vue.component('card', card)

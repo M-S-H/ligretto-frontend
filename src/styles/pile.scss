@@ -1,0 +1,8 @@
+.pile.one {
+  transform: scale(1.4);
+}
+
+.pile.two {
+  transition: transform 0.2s ease-in-out;
+  transform: scale(1);
+}
